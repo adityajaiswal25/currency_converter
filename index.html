@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Currency Converter by Aditya Jaiswal - Free Real-Time Exchange Rate Calculator</title>
+    <meta name="title" content="Currency Converter by Aditya Jaiswal - Free Real-Time Exchange Rate Calculator">
+    <meta name="description" content="Currency converter by Aditya Jaiswal. Convert currencies instantly with real-time exchange rates. Free currency converter supporting USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR, KRW and more. Accurate and up-to-date rates.">
+    <meta name="keywords" content="currency converter by aditya, currency converter aditya jaiswal, aditya jaiswal currency converter, exchange rate calculator by aditya, currency converter, exchange rate, currency calculator, USD converter, EUR converter, real-time exchange rates, money converter, forex calculator">
+    <meta name="author" content="Aditya Jaiswal">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Currency Converter by Aditya Jaiswal - Free Real-Time Exchange Rate Calculator">
+    <meta property="og:description" content="Currency converter by Aditya Jaiswal. Convert currencies instantly with real-time exchange rates. Free currency converter supporting multiple currencies.">
+    <meta property="og:site_name" content="Currency Converter by Aditya Jaiswal">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Currency Converter by Aditya Jaiswal - Free Real-Time Exchange Rate Calculator">
+    <meta property="twitter:description" content="Currency converter by Aditya Jaiswal. Convert currencies instantly with real-time exchange rates. Free currency converter supporting multiple currencies.">
+    
+    <!-- Structured Data for SEO -->
+    <!-- IMPORTANT: After deploying, update the "url" field below with your actual website URL -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Currency Converter by Aditya Jaiswal",
+      "description": "Free real-time currency converter with exchange rates for multiple currencies",
+      "url": "https://your-site-url.com",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Aditya Jaiswal",
+        "url": "https://www.linkedin.com/in/adityajaiswal25"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Aditya Jaiswal"
+      }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💱</text></svg>">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .rates-card {
+            grid-column: 2;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #4a4a4a;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h1 i {
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label i {
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #999;
+            font-size: 1.1em;
+            z-index: 1;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            font-weight: 500;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .result-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-container.error {
+            background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+            border-color: #fcc;
+        }
+
+        .result-container.success {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-color: #a5d6a7;
+        }
+
+        .result {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #4a4a4a;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .result i {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .result-amount {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .rates-section {
+            margin-top: 0;
+        }
+
+        .rates-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .rates-title {
+            font-size: 1.5em;
+            color: #4a4a4a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .refresh-btn:hover {
+            background: #5568d3;
+            transform: rotate(180deg);
+        }
+
+        .rates-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .rate-item:hover {
+            transform: translateX(5px);
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .rate-item:nth-child(1) { animation-delay: 0.1s; }
+        .rate-item:nth-child(2) { animation-delay: 0.2s; }
+        .rate-item:nth-child(3) { animation-delay: 0.3s; }
+        .rate-item:nth-child(4) { animation-delay: 0.4s; }
+        .rate-item:nth-child(5) { animation-delay: 0.5s; }
+        .rate-item:nth-child(6) { animation-delay: 0.6s; }
+        .rate-item:nth-child(7) { animation-delay: 0.7s; }
+        .rate-item:nth-child(8) { animation-delay: 0.8s; }
+        .rate-item:nth-child(9) { animation-delay: 0.9s; }
+        .rate-item:nth-child(10) { animation-delay: 1s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .rate-currency {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+
+        .rate-currency-code {
+            font-size: 1.1em;
+            color: #667eea;
+        }
+
+        .rate-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .footer-text {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-link i {
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .rates-card {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .result {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-exchange-alt"></i> Currency Converter</h1>
+            <p class="subtitle">Convert between currencies with real-time exchange rates <span style="color: #667eea; font-weight: 600;">by Aditya Jaiswal</span></p>
+            <form id="converterForm">
+                <div class="form-group">
+                    <label for="amount"><i class="fas fa-dollar-sign"></i> Amount:</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-coins"></i>
+                        <input type="number" id="amount" step="0.01" placeholder="Enter amount" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fromCurrency"><i class="fas fa-arrow-up"></i> From Currency:</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-globe"></i>
+                        <select id="fromCurrency" required>
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                            <option value="KRW">KRW - South Korean Won</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="toCurrency"><i class="fas fa-arrow-down"></i> To Currency:</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-globe"></i>
+                        <select id="toCurrency" required>
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                            <option value="KRW">KRW - South Korean Won</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit">
+                    <i class="fas fa-exchange-alt"></i>
+                    Convert
+                </button>
+            </form>
+            <div id="result" class="result-container">
+                <div class="result"></div>
+            </div>
+        </div>
+
+        <div class="card rates-card rates-section">
+            <div class="rates-header">
+                <h2 class="rates-title">
+                    <i class="fas fa-chart-line"></i>
+                    USD Exchange Rates
+                </h2>
+                <button class="refresh-btn" id="refreshRates" title="Refresh rates">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div id="ratesContainer" class="rates-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i> Loading rates...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">
+                Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> by Aditya Jaiswal
+            </p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/adityajaiswal25" target="_blank" rel="noopener noreferrer" class="footer-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/adityajaiswal25" target="_blank" rel="noopener noreferrer" class="footer-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Currency names mapping
+        const currencyNames = {
+            'USD': 'US Dollar',
+            'EUR': 'Euro',
+            'GBP': 'British Pound',
+            'JPY': 'Japanese Yen',
+            'CAD': 'Canadian Dollar',
+            'AUD': 'Australian Dollar',
+            'CHF': 'Swiss Franc',
+            'CNY': 'Chinese Yuan',
+            'INR': 'Indian Rupee',
+            'KRW': 'South Korean Won',
+            'BRL': 'Brazilian Real',
+            'MXN': 'Mexican Peso',
+            'SGD': 'Singapore Dollar',
+            'NZD': 'New Zealand Dollar'
+        };
+
+        // Popular currencies to display (10 currencies)
+        const popularCurrencies = ['EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CHF', 'CNY', 'INR', 'KRW', 'BRL'];
+
+        // Fetch and display exchange rates
+        async function loadExchangeRates() {
+            const container = document.getElementById('ratesContainer');
+            container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading rates...</div>';
+
+            try {
+                const response = await fetch(`/rates?base=USD&currencies=${popularCurrencies.join(',')}`);
+                const data = await response.json();
+
+                if (response.ok && data.rates) {
+                    container.innerHTML = '';
+                    popularCurrencies.forEach(currency => {
+                        if (data.rates[currency]) {
+                            const rateItem = document.createElement('div');
+                            rateItem.className = 'rate-item';
+                            rateItem.innerHTML = `
+                                <div class="rate-currency">
+                                    <span class="rate-currency-code">${currency}</span>
+                                    <span style="color: #999; font-size: 0.9em;">${currencyNames[currency] || currency}</span>
+                                </div>
+                                <div class="rate-value">${parseFloat(data.rates[currency]).toFixed(4)}</div>
+                            `;
+                            container.appendChild(rateItem);
+                        }
+                    });
+                } else {
+                    container.innerHTML = '<div class="loading" style="color: #f44336;">Failed to load rates. Please try again.</div>';
+                }
+            } catch (error) {
+                container.innerHTML = '<div class="loading" style="color: #f44336;">Error loading rates. Please check your connection.</div>';
+                console.error('Error fetching rates:', error);
+            }
+        }
+
+        // Refresh rates button
+        document.getElementById('refreshRates').addEventListener('click', loadExchangeRates);
+
+        // Load rates on page load
+        loadExchangeRates();
+
+        // Currency conversion form handler
+        document.getElementById('converterForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+            const resultContainer = document.getElementById('result');
+            const resultDiv = resultContainer.querySelector('.result');
+
+            if (isNaN(amount) || amount <= 0) {
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid amount.';
+                resultContainer.className = 'result-container show error';
+                return;
+            }
+
+            // Show loading state
+            resultDiv.innerHTML = '<i class="fas fa-spinner"></i> Converting...';
+            resultContainer.className = 'result-container show';
+
+            try {
+                const response = await fetch('/convert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: amount,
+                        from_currency: fromCurrency,
+                        to_currency: toCurrency
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <span>${data.original_amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span style="color: #999;">${data.from_currency}</span>
+                        <i class="fas fa-arrow-right" style="color: #999;"></i>
+                        <span class="result-amount">${data.converted_amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span style="color: #999;">${data.to_currency}</span>
+                    `;
+                    resultContainer.className = 'result-container show success';
+                } else {
+                    resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.error || 'An error occurred. Please try again.'}`;
+                    resultContainer.className = 'result-container show error';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error connecting to the server. Please try again.';
+                resultContainer.className = 'result-container show error';
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>
