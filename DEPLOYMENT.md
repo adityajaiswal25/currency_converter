@@ -113,43 +113,7 @@ After deployment, update the URL in `index.html`:
 4. Replace with your actual Render URL: `"url": "https://currency-converter.onrender.com"`
 5. Commit and push (Render will auto-deploy)
 
-## Step 3: Alternative - Deploy to Railway
 
-### 3.1 Sign Up
-
-1. Go to [railway.app](https://railway.app)
-2. Click **"Start a New Project"**
-3. Sign up with GitHub
-
-### 3.2 Deploy from GitHub
-
-1. Click **"New Project"**
-2. Select **"Deploy from GitHub repo"**
-3. Choose your `currency-converter` repository
-
-### 3.3 Set Environment Variable
-
-1. Click on your project
-2. Go to **"Variables"** tab
-3. Click **"New Variable"**
-4. Key: `EXCHANGE_RATE_API_KEY`
-5. Value: `your_api_key_here`
-6. Click **"Add"**
-
-### 3.4 Configure Start Command
-
-1. Go to **"Settings"** tab
-2. Under **"Deploy"**, set:
-   - Start Command: `gunicorn main:app --bind 0.0.0.0:$PORT`
-
-Railway will auto-deploy and provide a URL.
-
-## Step 4: Verify Deployment
-
-1. Visit your live URL
-2. Test the currency converter
-3. Check that exchange rates load
-4. Try converting some currencies
 
 ## Step 5: Submit to Search Engines (Optional)
 
